@@ -11,7 +11,7 @@ namespace Compare
         public (List<Comparison>, int[]) getResults(Model source, Model target)
         {
             int[] resultCounter = { 0, 0, 0, 0 };
-            List<Comparison> comparisons = new List<Comparison>();
+            var comparisons = new List<Comparison>();
 
             (comparisons, resultCounter) = getOtherResults(source, target, comparisons, resultCounter);
             (comparisons, resultCounter) = getAdded(source, target, comparisons, resultCounter);

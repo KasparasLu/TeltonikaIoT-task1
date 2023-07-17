@@ -16,7 +16,7 @@ namespace Compare
         }
         public string userSelectedPath(string[] models)
         {
-            UserInput userInput = new UserInput();
+            var userInput = new UserInput();
             printMenu(models);
             Console.WriteLine("Chose the source file: ");
             string path = models[userInput.userSelectedChoice(models.Length) - 1];

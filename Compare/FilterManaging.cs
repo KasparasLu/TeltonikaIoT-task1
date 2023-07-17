@@ -14,7 +14,7 @@ namespace Compare
         }
         public HashSet<string> addResultFilter(HashSet<string> filter)
         {
-            UserInput userInput = new UserInput();
+            var userInput = new UserInput();
             printMenu(ResultMenu);
             int index = userInput.userSelectedChoice(ResultMenu.Length);
             filter.Add(ResultMenu[index - 1]);

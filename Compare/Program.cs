@@ -13,13 +13,13 @@ namespace Compare
     {
         public static void Main(string[] args)
         {
-            UserInput       userInput       = new UserInput();
-            FileManaging    fileManaging    = new FileManaging();
-            DataManaging    dataManaging    = new DataManaging();
-            FilterManaging  filterManaging  = new FilterManaging();
-            DisplayFilters  displayFilters  = new DisplayFilters();
-            ResultsManaging resultsManaging = new ResultsManaging();
-            PrintingResults printingResults = new PrintingResults();
+            var userInput       = new UserInput();
+            var fileManaging    = new FileManaging();
+            var dataManaging    = new DataManaging();
+            var filterManaging  = new FilterManaging();
+            var displayFilters  = new DisplayFilters();
+            var resultsManaging = new ResultsManaging();
+            var printingResults = new PrintingResults();
 
             string idFilter = "";
             var resultFilter = new HashSet<string>();
