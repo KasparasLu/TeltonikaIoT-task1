@@ -1,5 +1,4 @@
-﻿using static Compare.UserInput;
-using static Compare.Menu;
+﻿using static Compare.Menu;
 
 namespace Compare
 {
@@ -14,10 +13,10 @@ namespace Compare
         }
         public HashSet<string> addResultFilter(HashSet<string> filter)
         {
-            var userInput = new UserInput();
-            printMenu(ResultMenu);
-            int index = userInput.userSelectedChoice(ResultMenu.Length);
-            filter.Add(ResultMenu[index - 1]);
+            var menu = new Menu();
+            menu.printMenu(menu.ResultMenu);
+            int index = new UserInput().userSelectedChoice(menu.ResultMenu.Length);
+            filter.Add(menu.ResultMenu[index - 1]);
             Console.WriteLine("The result filter has been updated");
             return filter;
         }

@@ -20,11 +20,10 @@ namespace Compare
         }
         public void printResultsTable(List<Comparison> results, string idFilter, HashSet<string> resultFilter)
         {
-            var cosmetics = new Cosmetics();
             Console.WriteLine(Format, "Source ID", "Source value", "Target ID", "Target value", "Result");
             for (int i = 0; i < results.Count; i++)
             {
-                if (!cosmetics.checkFilters(idFilter, resultFilter, results[i])) continue;
+                if (!new Cosmetics().checkFilters(idFilter, resultFilter, results[i])) continue;
                 Console.WriteLine(Format, results[i].sourceId, results[i].sourceValue, results[i].targetId, results[i].targetValue, results[i].result);
             }
         }

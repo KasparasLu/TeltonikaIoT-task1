@@ -13,25 +13,45 @@ namespace Compare
     {
         public static void Main(string[] args)
         {
-            var userInput       = new UserInput();
-            var fileManaging    = new FileManaging();
-            var dataManaging    = new DataManaging();
-            var filterManaging  = new FilterManaging();
-            var displayFilters  = new DisplayFilters();
-            var resultsManaging = new ResultsManaging();
-            var printingResults = new PrintingResults();
 
             string idFilter = "";
             var resultFilter = new HashSet<string>();
 
+            var menu          = new Menu();
+            var fileManaging  = new FileManaging();
+            
+            Console.Write("Enter the path to the folder with the data.cfg files(The path shouldn't contain any spaces):");
+
+        choosePath:
+            var temporary = Console.ReadLine();
+            if (menu.DataPath != temporary) Console.WriteLine("different because {0} is not {1}", menu.DataPath, temporary);
+            new UserInput().continue_program();
+            if (!Directory.Exists(menu.DataPath))
+            {
+                Console.WriteLine("Wrong path, it either doesn't exists, or has special characters");
+                Console.WriteLine(menu.DataPath);
+                goto choosePath;
+            }
+            if(menu.ModelMenu().Length<=0)
+            {
+                Console.WriteLine("Wrong path, there are no .cfg files there, enter a new path");
+                goto choosePath;
+            }
+            Console.Clear();
+            
             chooseModels:
-            string sourcePath = fileManaging.userSelectedPath(ModelMenu);
-            string targetPath = fileManaging.userSelectedPath(ModelMenu);
+            string sourcePath = fileManaging.userSelectedPath(menu.ModelMenu());
+            string targetPath = fileManaging.userSelectedPath(menu.ModelMenu());
+            
+            var dataManaging    = new DataManaging();
             var source = dataManaging.getData(sourcePath);
             var target = dataManaging.getData(targetPath);
 
-            var results = resultsManaging.getResults(source, target);
+            var results = new ResultsManaging().getResults(source, target);
 
+            var userInput       = new UserInput();
+            var filterManaging  = new FilterManaging();
+            
             menuStart:
             userInput.continue_program();
 
@@ -39,15 +59,15 @@ namespace Compare
             source.printDescription();
             target.printDescription();
 
-            printMenu(FeatureMenu);
-            switch(userInput.userSelectedChoice(FeatureMenu.Length))
+            menu.printMenu(menu.FeatureMenu);
+            switch(userInput.userSelectedChoice(menu.FeatureMenu.Length))
             {
                 case 1:
                     fileManaging.showFileNames(source, target);
                     goto menuStart;
 
                 case 2:
-                    printingResults.printResults(results.Item1, results.Item2, idFilter, resultFilter);
+                    new PrintingResults().printResults(results.Item1, results.Item2, idFilter, resultFilter);
                     goto menuStart;
 
                 case 3:
@@ -63,7 +83,7 @@ namespace Compare
                     goto menuStart;
 
                 case 6:
-                    displayFilters.displayAllFilters(idFilter, resultFilter);
+                    new DisplayFilters().displayAllFilters(idFilter, resultFilter);
                     goto menuStart;
 
                 case 7:

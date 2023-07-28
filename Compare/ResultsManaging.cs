@@ -35,7 +35,7 @@ namespace Compare
         {
             for (int i = 0; i < source.comparableID.Count; i++)
             {
-                Comparison compare = new Comparison("", "", "", "", "");
+                var compare = new Comparison("", "", "", "", "");
                 compare.sourceId = source.comparableID[i];
                 if (target.comparableID.Contains(source.comparableID[i]))
                 {

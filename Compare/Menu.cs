@@ -1,10 +1,12 @@
 ﻿using static Compare.FileManaging;
+using System;
 
 namespace Compare
 {
     internal class Menu
     {
-        public static void printMenu(string[] menu)
+        public string DataPath = @"C:\Users\iot2\Desktop\PraktikosUždaviniai\2Užduotis\CgfToolWIthApi\data";
+        public void printMenu(string[] menu)
         {
             Console.WriteLine("Choose from the listed below:");
             for(int i=0; i<menu.Length; i++)
@@ -13,25 +15,23 @@ namespace Compare
             }
         }
 
-        private static string[] _resultMenu = { "Unchanged", "Modified", "Removed", "Added" };
+        private string[] _resultMenu = { "Unchanged", "Modified", "Removed", "Added" };
 
-        protected internal static string[] ResultMenu
+        protected internal string[] ResultMenu
         {
             get { return _resultMenu; }
         }
 
-        private static string[] _featureMenu = { "Show file names", "Print comparison", "Add ID filter", "Add result filter", "clear filters", "display filters", "select new source and target", "exit" };
+        private string[] _featureMenu = { "Show file names", "Print comparison", "Add ID filter", "Add result filter", "clear filters", "display filters", "select new source and target", "exit" };
 
-        protected internal static string[] FeatureMenu
+        protected internal string[] FeatureMenu
         {
             get { return _featureMenu; }
         }
 
-        private static string[] _models = Directory.GetFiles(DataPath);
-
-        protected internal static string[] ModelMenu
+        public string[] ModelMenu()
         {
-            get { return _models; }
+            return Directory.GetFiles(DataPath, "*.cfg");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.IO.Compression;
 using static Compare.FileManaging;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -8,8 +9,12 @@ namespace Compare
     {
         public string[] readData(string path)
         {
-            string text = File.ReadAllText(path);
-            return text.Split(new char[] { ';', ':' });
+            string file = "";
+            using (FileStream reader = File.OpenRead(path))
+            using (GZipStream zip = new GZipStream(reader, CompressionMode.Decompress, true))
+            using (StreamReader unzip = new StreamReader(zip))
+                while (!unzip.EndOfStream) file += unzip.ReadLine();
+            return file.Split(new char[] { ';', ':' });
         }
         public Model getData(string path)
         {
@@ -31,7 +36,7 @@ namespace Compare
                     compareValue.Add(pairs[i + 1]);
                 }
             }
-            return new Model(path.Substring(DataPath.Length + 1), compareId, compareValue, displayId, displayValue);
+            return new Model(path.Substring(new Menu().DataPath.Length + 1), compareId, compareValue, displayId, displayValue);
         }
     }
 }
