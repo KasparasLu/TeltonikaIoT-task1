@@ -36,7 +36,7 @@ namespace Compare
                     compareValue.Add(pairs[i + 1]);
                 }
             }
-            return new Model(path.Substring(new Menu().DataPath.Length + 1), compareId, compareValue, displayId, displayValue);
+            return new Model(path.Substring(new Menu().getDataPath().Length + 1), compareId, compareValue, displayId, displayValue);
         }
     }
 }

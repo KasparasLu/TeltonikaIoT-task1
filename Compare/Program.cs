@@ -13,34 +13,16 @@ namespace Compare
     {
         public static void Main(string[] args)
         {
-
             string idFilter = "";
             var resultFilter = new HashSet<string>();
 
             var menu          = new Menu();
             var fileManaging  = new FileManaging();
-            
-            Console.Write("Enter the path to the folder with the data.cfg files(The path shouldn't contain any spaces):");
 
-        choosePath:
-            var temporary = Console.ReadLine();
-            if (menu.DataPath != temporary) Console.WriteLine("different because {0} is not {1}", menu.DataPath, temporary);
-            new UserInput().continue_program();
-            if (!Directory.Exists(menu.DataPath))
-            {
-                Console.WriteLine("Wrong path, it either doesn't exists, or has special characters");
-                Console.WriteLine(menu.DataPath);
-                goto choosePath;
-            }
-            if(menu.ModelMenu().Length<=0)
-            {
-                Console.WriteLine("Wrong path, there are no .cfg files there, enter a new path");
-                goto choosePath;
-            }
-            Console.Clear();
+            new Declare().path();
             
             chooseModels:
-            string sourcePath = fileManaging.userSelectedPath(menu.ModelMenu());
+            string sourcePath = fileManaging.userSelectedPath(menu.ModelMenu()); //Ima declarinta path nuo dabartinio directory (bin) reikia kad imtu nuo root
             string targetPath = fileManaging.userSelectedPath(menu.ModelMenu());
             
             var dataManaging    = new DataManaging();
@@ -92,7 +74,6 @@ namespace Compare
                 case 8:
                     goto endProgram;
             };
-            
             endProgram:
             Console.WriteLine("Thank you for using the application. Goodbye!");
         }

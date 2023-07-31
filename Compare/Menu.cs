@@ -5,7 +5,18 @@ namespace Compare
 {
     internal class Menu
     {
-        public string DataPath = @"C:\Users\iot2\Desktop\PraktikosUždaviniai\2Užduotis\CgfToolWIthApi\data";
+
+        public static string _dataPath = @"C:\Users\iot2\Desktop\PraktikosUzdaviniai\2Uzduotis\CgfToolWIthApi\data";
+        public string getDataPath()
+        {
+            return _dataPath;
+        }
+
+        public void setDataPath(string path)
+        {
+            _dataPath = @"{path}";
+        }
+
         public void printMenu(string[] menu)
         {
             Console.WriteLine("Choose from the listed below:");
@@ -31,7 +42,7 @@ namespace Compare
 
         public string[] ModelMenu()
         {
-            return Directory.GetFiles(DataPath, "*.cfg");
+            return Directory.GetFiles(getDataPath(), "*.cfg");
         }
     }
 }
