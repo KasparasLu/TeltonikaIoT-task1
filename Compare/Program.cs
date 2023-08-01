@@ -19,11 +19,12 @@ namespace Compare
             var menu          = new Menu();
             var fileManaging  = new FileManaging();
 
+            choosePath:
             new Declare().path();
             
             chooseModels:
-            string sourcePath = fileManaging.userSelectedPath(menu.ModelMenu()); //Ima declarinta path nuo dabartinio directory (bin) reikia kad imtu nuo root
-            string targetPath = fileManaging.userSelectedPath(menu.ModelMenu());
+            string sourcePath = fileManaging.userSelectedPath(menu.ModelMenu(), "source"); //Ima declarinta path nuo dabartinio directory (bin) reikia kad imtu nuo root
+            string targetPath = fileManaging.userSelectedPath(menu.ModelMenu(), "target");
             
             var dataManaging    = new DataManaging();
             var source = dataManaging.getData(sourcePath);
@@ -72,6 +73,9 @@ namespace Compare
                     goto chooseModels;
 
                 case 8:
+                    goto choosePath;
+
+                case 9:
                     goto endProgram;
             };
             endProgram:

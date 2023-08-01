@@ -15,9 +15,9 @@ namespace Compare
 
             choosePath:
             var path = Console.ReadLine();
-            if (IsValidFilePath($@"{path}"))
+            if (IsValidFilePath(@$"{path}"))
             {
-                new Menu().setDataPath($@"{path}");
+                new Menu().setDataPath(path);
             }
             else goto choosePath;
             Console.Clear();
@@ -25,33 +25,21 @@ namespace Compare
 
         public bool IsValidFilePath(string path)
         {
-            // Check if the path is null, empty, or contains invalid characters
             if (string.IsNullOrWhiteSpace(path) || path.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
             {
                 Console.WriteLine("The path is either empty or contains invalid characters");
                 return false;
             }
-            if (string.Equals(path, new Menu().getDataPath(), StringComparison.OrdinalIgnoreCase))
-            {
-                Console.WriteLine("yeah they the same");
-                new UserInput().continue_program();
-            }
-            else Console.WriteLine("Nah they diff");
-            // Check if the directory exists (optional)
             if (!Directory.Exists(path))
             {
-                Console.WriteLine(path);
                 Console.WriteLine("The directory doesn't exist");
                 return false;
             }
-            // Check if there are 
             if (Directory.GetFiles(path, "*.cfg").Length == 0)
             {
                 Console.WriteLine("The directory doesn't contain .cfg files");
                 return false;
             }
-
-            // You can add more checks as per your requirements (e.g., file existence, permissions, etc.)
 
             return true;
         }

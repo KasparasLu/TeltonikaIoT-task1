@@ -14,7 +14,7 @@ namespace Compare
 
         public void setDataPath(string path)
         {
-            _dataPath = @"{path}";
+            _dataPath = @$"{path}";
         }
 
         public void printMenu(string[] menu)
@@ -33,7 +33,7 @@ namespace Compare
             get { return _resultMenu; }
         }
 
-        private string[] _featureMenu = { "Show file names", "Print comparison", "Add ID filter", "Add result filter", "clear filters", "display filters", "select new source and target", "exit" };
+        private string[] _featureMenu = { "Show file names", "Print comparison", "Add ID filter", "Add result filter", "clear filters", "display filters", "select new source and target", "declare a new path", "exit" };
 
         protected internal string[] FeatureMenu
         {
